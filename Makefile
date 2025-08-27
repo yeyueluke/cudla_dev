@@ -52,7 +52,7 @@ INCLUDES += -I $(CUDA_PATH)/include \
             -I $(OPENCV_INCLUDE_PATH) \
             -I /usr/include/jsoncpp/ \
 			-I /usr/include \
-			-I /home/autoware/develop/nvsci_headers
+			-I ./nvsci_headers
 LIBRARIES += -l cudla -L$(CUDA_PATH)/lib64 \
              -l cuda -l cudart -l nvinfer \
              -L $(OPENCV_LIB_PATH) \
@@ -61,7 +61,10 @@ LIBRARIES += -l cudla -L$(CUDA_PATH)/lib64 \
              -l jsoncpp \
 			 -L /usr/lib/aarch64-linux-gnu/nvidia/ -lnvscibuf \
 			 -L /usr/lib/aarch64-linux-gnu/nvidia/ -lnvscisync
-
+######################################################################################
+# on jetpack 5.1.2(35.4.1) use: /usr/lib/aarch64-linux-gnu/tegra/
+# on jetpack 6.2 (36.4.3) use: /usr/lib/aarch64-linux-gnu/nvidia/ or /usr/lib/aarch64-linux-gnu/tegra all ok
+#####################################################################################
 CXXSRCS := $(wildcard $(SRCDIR)/*.cc)
 CXXOBJS := $(patsubst %.cc,$(BUILD_DIR)/%.o,$(notdir $(CXXSRCS)))
 NVCCSRCS := $(wildcard $(SRCDIR)/*.cu)
